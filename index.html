@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tokoku - Sasa Fashion</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff0f5;
+      margin: 0;
+      color: #333;
+    }
+    header {
+      background: #ff69b4;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      margin: 0.5rem 0;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .welcome {
+      background: #ffe4ec;
+      color: #c2185b;
+      text-align: center;
+      padding: 0.5rem;
+      font-weight: 500;
+    }
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 2rem auto;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .product {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 1rem;
+      text-align: center;
+    }
+    .product img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .product h3 {
+      margin: 0.5rem 0;
+    }
+    .price {
+      color: #e91e63;
+      font-weight: bold;
+    }
+    button {
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: #ff1493;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #c71585;
+    }
+    .cart {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 2rem;
+    }
+    .cart ul {
+      list-style: none;
+      padding: 0;
+    }
+    .cart li {
+      margin-bottom: 0.5rem;
+    }
+    footer {
+      background: #ff69b4;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 2rem;
+    }
+    .footer-info {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .footer-info h4 {
+      margin: 1rem 0 0.5rem;
+    }
+    .sosmed-icons img {
+      width: 24px;
+      margin: 0 8px;
+      vertical-align: middle;
+    }
+    @media (max-width: 600px) {
+      nav ul { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TokoKu</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Produk</a></li>
+        <li><a href="#">Kontak</a></li>
+        <li><a href="#" onclick="toggleCart()">🛒 Keranjang (<span id="cart-count">0</span>)</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="welcome">
+    Selamat datang di TokoKu! Dapatkan diskon 10% untuk semua produk hari ini 🎉
+  </div>
+
+  <div class="container">
+    <div class="product-grid">
+      <div class="product">
+        <img src="foto 1.jpeg" alt="Kemeja Wispie">
+        <h3>Flowy, adem, dan vibes-nya soft girl banget. Gas outfit chill tapi classy!</h3>
+        <p class="price">Rp 150.000</p>
+        <button onclick="addToCart('Kemeja Wispie', 150000)">Tambah ke Keranjang</button>
+      </div>
+      <div class="product">
+        <img src="top tee.jpeg" alt="Kulot Premium">
+        <h3>Simple tapi slay. Cukup pake ini, lo udah jadi cewek aesthetic 💅</h3>
+        <p class="price">Rp 75.000</p>
+        <button onclick="addToCart('Kulot Premium', 130000)">Tambah ke Keranjang</button>
+      </div>
+      <div class="product">
+        <img src="cutbray.jpeg" alt="Belt Wanita">
+        <h3>Look jadul rasa modern! Kaki jenjang auto aktif 🍑✨</h3>
+        <p class="price">Rp 125.000</p>
+        <button onclick="addToCart('Belt Wanita', 80000)">Tambah ke Keranjang</button>
+      </div>
+      <div class="product">
+        <img src="belt.jpeg" alt="Headband Lucu">
+        <h3>Outfit lo terlalu basic? Tambah sabuk ini, langsung glow up!</h3>
+        <p class="price">Rp 55.000</p>
+        <button onclick="addToCart('Headband Lucu', 50000)">Tambah ke Keranjang</button>
+      </div>
+      <div class="product">
+        <img src="hdbnd.jpeg" alt="Headband Lucu">
+        <h3>Buat skincare, chill, atau OOTD-an. Lucu maksimal, ribet minimal 💗
+
+</h3>
+        <p class="price">Rp 25.000</p>
+        <button onclick="addToCart('Headband Lucu', 50000)">Tambah ke Keranjang</button>
+      </div>
+    </div>
+
+    <div class="cart" id="cart" style="display:none;">
+      <h2>Keranjang Belanja</h2>
+      <ul id="cart-items"></ul>
+      <p><strong>Total: Rp <span id="cart-total">0</span></strong></p>
+      <button onclick="checkout()">Checkout</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-info">
+      <h4>Hubungi Kami</h4>
+      <p>Email: snajwaalya@gmail.com | Telp: 0831-2664-6696</p>
+      <p>Alamat: Jl. Melati No.123, Bandung, Indonesia</p>
+
+      <h4>Produk Kami</h4>
+      <p>Kemeja, Kulot, Belt, Headband, dan aksesoris wanita.</p>
+
+      <h4>Ikuti Kami di Sosial Media</h4>
+      <div class="sosmed-icons">
+        <a href="#"><img src="ige.jpeg" alt="Instagram"></a>
+        <a href="#"><img src="x.png" alt="Facebook"></a>
+        <a href="#"><img src="wawa.jpeg" alt="TikTok"></a>
+      </div>
+    </div>
+    <p style="margin-top: 1rem;">&copy; 2025 TokoKu. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let cart = [];
+    let discount = 0.10;
+
+    function formatRupiah(angka) {
+      return angka.toLocaleString('id-ID');
+    }
+
+    function addToCart(nama, harga) {
+      let hargaDiskon = harga - (harga * discount);
+      cart.push({ nama, harga: hargaDiskon });
+      updateCart();
+      alert(`${nama} ditambahkan ke keranjang dengan diskon 10%!`);
+    }
+
+    function updateCart() {
+      const cartList = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      const cartCount = document.getElementById('cart-count');
+
+      cartList.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        total += item.harga;
+        const li = document.createElement('li');
+        li.innerHTML = `${item.nama} - Rp ${formatRupiah(item.harga)} <button onclick="removeItem(${index})">Hapus</button>`;
+        cartList.appendChild(li);
+      });
+
+      cartTotal.textContent = formatRupiah(total);
+      cartCount.textContent = cart.length;
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function toggleCart() {
+      const cartDiv = document.getElementById('cart');
+      cartDiv.style.display = cartDiv.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Keranjang kosong!');
+        return;
+      }
+      alert('Terima kasih atas pembelian Anda!');
+      cart = [];
+      updateCart();
+      toggleCart();
+    }
+  </script>
+</body>
+</html>
